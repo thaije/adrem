@@ -42,16 +42,10 @@ function results = run_methods(data, methods, varargin)
   % Defaults
   if nargin < 2, methods = all_methods(); end
   
-  if iscell(data)
-    % Run on multiple datasets
-    results = cellfun(@(d)run_methods(d, methods, opts), data, 'UniformOutput',false);
-    return
-  end
+  % assume data argument is always an cell array with the dataset and
+  % features defined
+  data = load_dataset(data{1}, data{2});
   
-  % Load dataset?
-  if ischar(data) || ~isfield(data,'x')
-    data = load_dataset(data);
-  end
   
   % Create output and cache directories
   if ~exist(opts.cache_path,'dir')

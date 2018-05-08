@@ -33,7 +33,7 @@ function data = load_dataset(data, features, preprocessing)
   
   % We assume that the data directory is located relative to the script
   datadir.base = 'data';
-  datadir.ocvgg = '~/data/office-caltech';
+  datadir.ocvgg = 'data/office-caltech';
   datadir.ovgg = '~/data/office31/vgg';
   datadir.decaf = '../data/';
   datadir.deep = '~/data/domain-adaptation';
@@ -203,7 +203,7 @@ function data = load_office_caltech(datadir, data, protocol)
     data.x = {};
     data.y = {};
     for i=1:4
-      load([datadir.base, '/office10/', data.domains{i}, '_SURF_L10.mat'], 'fts','labels');
+      load([datadir.base, '/office-caltech/', data.domains{i}, '_SURF_L10.mat'], 'fts','labels');
       data.x{i} = fts;
       data.y{i} = labels;
     end
