@@ -18,7 +18,8 @@ function [y_tgt, best_opts, model] = predict_liblinear_cv(x_src,y_src,x_tgt, var
     opts = struct(varargin{:});
   end
   if ~isfield(opts,'type'), opts.type = 3; end
-  if ~isfield(opts,'C'), opts.C = [0.001 0.01 0.1 1.0 10 100 1000 10000]; end
+  %if ~isfield(opts,'C'), opts.C = [0.001 0.01 0.1 1.0 10 100 1000 10000]; end
+  if ~isfield(opts,'C'), opts.C = [1.0]; end
   if ~isfield(opts,'num_folds'), opts.num_folds = 2; end
   if ~isfield(opts,'verbose'), opts.verbose = 0; end
   if ~isfield(opts,'probability') opts.probability = false; end
@@ -28,20 +29,20 @@ function [y_tgt, best_opts, model] = predict_liblinear_cv(x_src,y_src,x_tgt, var
   else
     bias = -1; % liblinear default
   end
-  
-  acc = zeros(size(opts.C));
-  for i = 1:numel(opts.C)
-    acc(i) = train(y_src, sparse(x_src), sprintf('-q -s %d -c %g -B %d -v %d',opts.type,opts.C(i),bias,opts.num_folds));
-  end
-  [best_acc,best_i] = max(acc);
-  best_C = opts.C(best_i);
-  best_opts = struct('C', best_C, 'type', opts.type, 'bias', opts.bias, 'probability',opts.probability);
-  
-  if opts.verbose
-    fprintf('[best C: %g]', best_C);
-  end
-  
-  model = train(y_src, sparse(x_src), sprintf('-q -s %d -c %g -B %d',opts.type,best_C,bias));
+    
+%   acc = zeros(size(opts.C));
+%   for i = 1:numel(opts.C)
+%     acc(i) = train(y_src, sparse(x_src), sprintf('-q -s %d -c %g -B %d -v %d',opts.type,opts.C(i),bias,opts.num_folds));
+%   end
+%   [best_acc,best_i] = max(acc);
+%   best_C = opts.C(best_i);
+%   best_opts = struct('C', best_C, 'type', opts.type, 'bias', opts.bias, 'probability',opts.probability);
+%   
+%   if opts.verbose
+%     fprintf('[best C: %g]', best_C);
+%   end
+  best_opts = struct('C', opts.C(1), 'type', opts.type, 'bias', opts.bias, 'probability',opts.probability);
+  model = train(y_src, sparse(x_src), sprintf('-q -s %d -c %g -B %d',opts.type,opts.C(1),bias));
   y_tgt = zeros(size(x_tgt,1),1);
   if nargout>1
     [y_tgt,acc,s_tgt] = predict(y_tgt, sparse(x_tgt), model,'-q');

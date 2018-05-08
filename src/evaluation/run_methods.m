@@ -39,8 +39,11 @@ function results = run_methods(data, methods, varargin)
   if ~isfield(opts,'update_cache'), opts.update_cache = opts.use_cache; end
   if ~isfield(opts,'cache_path'), opts.cache_path = '~/cache/domain-adaptation'; end
   
+  opts.verbose = true;
+  
   % Defaults
-  if nargin < 2, methods = all_methods(); end
+%   if nargin < 2, methods = all_methods(); end
+  if nargin < 2, methods = our_methods(); end
   
   % assume data argument is always an cell array with the dataset and
   % features defined
@@ -71,19 +74,7 @@ function results = run_methods(data, methods, varargin)
     fprintf(plain_out, '\n');
   end
   
-  % Find results from papers
-  dummy_results = nan*zeros(numel(methods), data.num_domain_pairs);
-  paper_results = results_from_papers(data);
-  for i=1:numel(methods)
-    if isfield(methods{i},'dummy')
-      for j=1:numel(paper_results.methods)
-        if isequal(methods{i}.name, paper_results.methods{j})
-          dummy_results(i,:) = paper_results.accs(j,1:end-1);
-          break;
-        end
-      end
-    end
-  end
+
   
   if opts.verbose
     % Table formating stuff
@@ -186,7 +177,8 @@ function results = run_methods(data, methods, varargin)
           else
             % Preprocess data
             if ~exist('x_train_pp','var')
-              [x_train_pp,x_test_pp] = preprocess(x_train, y_train, x_test, data.preprocessing);
+%               [x_train_pp,x_test_pp] = preprocess(x_train, y_train, x_test, data.preprocessing);
+              [x_train_pp,x_test_pp] = preprocess(x_train, y_train, x_test, 'joint-std');
             end
             % Run method
             id = tic;

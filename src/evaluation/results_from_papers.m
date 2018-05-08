@@ -88,38 +88,38 @@ function results = results_from_papers(data)
       order = {'A->W', 'D->W', 'W->D', 'A->D', 'D->A', 'W->A', 'Z:avg'};
       [~,perm]=sort(order);
       results.methods{end+1} = 'RevGrad';
-      results.accs(end+1,:)  = [73.0, 96.4, 99.2, nan, nan, nan, nan](perm) / 100;
+      results.accs(end+1,:)  = [73.0, 96.4, 99.2, nan, nan, nan, nan]*(perm) / 100;
       results.methods{end+1} = 'RTN';
-      results.accs(end+1,:)  = [73.3, 96.8, 99.6, 71.0, 50.5, 51.0, 73.7](perm) / 100;
+      results.accs(end+1,:)  = [73.3, 96.8, 99.6, 71.0, 50.5, 51.0, 73.7]*(perm) / 100;
       %results.accs_std(end+1,:) = [0.3,0.2,0.1,0.2,0.3,0.1] / 100;
       % [3]
       order = {'A->W', 'D->W', 'W->D', 'W->A', 'A->D', 'D->A', 'Z:avg'};
       [~,perm]=sort(order);
       results.methods{end+1} = 'TDS';
-      results.accs(end+1,:)  = [.811,.964,.992,.638,.841,.583, nan](perm);
+      results.accs(end+1,:)  = [.811,.964,.992,.638,.841,.583, nan]*(perm);
     end
     if isequal(data.features,'raw-resnet')
       % [4], Table 1, resnet results
       order = {'A->W', 'D->W', 'W->D', 'W->A', 'A->D', 'D->A', 'Z:avg'};
       [~,perm]=sort(order);
       results.methods{end+1} = 'ResNet';
-      results.accs(end+1,:)  = [68.4, 96.7, 99.3, 68.9, 62.5, 60.7, 76.1](perm) / 100;
+      results.accs(end+1,:)  = [68.4, 96.7, 99.3, 68.9, 62.5, 60.7, 76.1]*(perm) / 100;
       results.methods{end+1} = 'TCA'; % Pan et al., 2011
-      results.accs(end+1,:)  = [72.7, 96.7, 99.6, 74.1, 61.7, 60.9, 77.6](perm) / 100;
+      results.accs(end+1,:)  = [72.7, 96.7, 99.6, 74.1, 61.7, 60.9, 77.6]*(perm) / 100;
       results.methods{end+1} = 'GFK'; % Gong et al., 2012
-      results.accs(end+1,:)  = [72.8, 95.0, 98.2, 74.5, 63.4, 61.0, 77.5](perm) / 100;
+      results.accs(end+1,:)  = [72.8, 95.0, 98.2, 74.5, 63.4, 61.0, 77.5]*(perm) / 100;
       results.methods{end+1} = 'DDC'; % (Tzeng et al., 2014)
-      results.accs(end+1,:)  = [75.6, 96.0, 98.2, 76.5, 62.2, 61.5, 78.3](perm) / 100;
+      results.accs(end+1,:)  = [75.6, 96.0, 98.2, 76.5, 62.2, 61.5, 78.3]*(perm) / 100;
       results.methods{end+1} = 'DAN'; % (Long et al., 2015)
-      results.accs(end+1,:)  = [80.5, 97.1, 99.6, 78.6, 63.6, 62.8, 80.4](perm) / 100;
+      results.accs(end+1,:)  = [80.5, 97.1, 99.6, 78.6, 63.6, 62.8, 80.4]*(perm) / 100;
       results.methods{end+1} = 'RTN'; % (Long et al., 2016)
-      results.accs(end+1,:)  = [84.5, 96.8, 99.4, 77.5, 66.2, 64.8, 81.6](perm) / 100;
+      results.accs(end+1,:)  = [84.5, 96.8, 99.4, 77.5, 66.2, 64.8, 81.6]*(perm) / 100;
       results.methods{end+1} = 'RevGrad'; % (Ganin & Lempitsky, 2015)
-      results.accs(end+1,:)  = [82.0, 96.9, 99.1, 79.7, 68.2, 67.4, 82.2](perm) / 100;
+      results.accs(end+1,:)  = [82.0, 96.9, 99.1, 79.7, 68.2, 67.4, 82.2]*(perm) / 100;
       results.methods{end+1} = 'JAN'; % [4]
-      results.accs(end+1,:)  = [85.4, 97.4, 99.8, 84.7, 68.6, 70.0, 84.3](perm) / 100;
+      results.accs(end+1,:)  = [85.4, 97.4, 99.8, 84.7, 68.6, 70.0, 84.3]*(perm) / 100;
       results.methods{end+1} = 'JAN-A'; % [4]
-      results.accs(end+1,:)  = [86.0, 96.7, 99.7, 85.1, 69.2, 70.7, 84.6](perm) / 100;
+      results.accs(end+1,:)  = [86.0, 96.7, 99.7, 85.1, 69.2, 70.7, 84.6]*(perm) / 100;
     end
     
     
@@ -147,7 +147,7 @@ function results = results_from_papers(data)
       order = {'A→W','D→W','W→D','A→D','D→A','W→A','A→C','W→C','D→C','C→A','C→W','C→D','z:Avg'};
       [~,perm]=sort(order);
       results.methods{end+1} = 'RTN';
-      results.accs(end+1,:)  = [95.2, 99.2, 100, 95.5, 93.8, 92,5, 88.1, 86.6, 84.6, 93.7, 96.9, 94.2, 93.4](perm) / 100;
+      results.accs(end+1,:)  = [95.2, 99.2, 100, 95.5, 93.8, 92,5, 88.1, 86.6, 84.6, 93.7, 96.9, 94.2, 93.4]*(perm) / 100;
     end
     
   elseif isequal(data.name, 'cross-dataset-testbed') && isequal(data.features,'decaf-fc7') && isequal(data.preprocessing,'zscore')
