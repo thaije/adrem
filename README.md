@@ -3,7 +3,7 @@ Fork of https://github.com/twanvl/adrem
 
 ## How to use
 
-#### Install
+### Install
 - Clone the liblinear github in adrem: https://github.com/cjlin1/liblinear
 - Clone the libsvm github in adrem: https://github.com/cjlin1/libsvm
 
@@ -16,6 +16,6 @@ Fork of https://github.com/twanvl/adrem
 ##### Windows
 - For Windows, git clone above mentioned repos, and add to the top of your Matlab script: `addpath (genpath ('path\to\libsvm_or_liblinear'))`
 
-#### Run
+### Run
 - See main.m for parameter settings and run options
 - run main.m in matlab
